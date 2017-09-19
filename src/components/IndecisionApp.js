@@ -13,16 +13,13 @@ class IndecisionApp extends React.Component {
         this.handleAddOpt = this.handleAddOpt.bind(this);
         this.handleDeleteOptionSingle = this.handleDeleteOptionSingle.bind(this);
         this.state = {
-            //optionsArr: props.optionsArr
             optionsArr: []
             
         }
     }
-    //component fires up when the class starts
-    //note that this feature works only with classes and doesn't work with functions
+
     componentDidMount() {
-        //getting stored data from localstorage and fetched it.
-        //only when start new page / or refresh it 
+
         try {
             const json = localStorage.getItem('optionsArr'); 
             const options = JSON.parse(json);
@@ -31,12 +28,9 @@ class IndecisionApp extends React.Component {
                 this.setState(() => ({optionsArr: options}));            
             }
         } catch (error) {
-            //Do nothing at all
         }
     };
 
-    //component runs after data (props/states) has been changed!
-    //accepts argus for props and states
     componentDidUpdate(prevProps, prevState){
         if(prevState.optionsArr.length !== this.state.optionsArr.length){
             //storing data into local storage
@@ -51,12 +45,6 @@ class IndecisionApp extends React.Component {
 
     handleDeleteAll(){
         this.setState(() => ( { optionsArr: [] } ));
-
-        // this.setState(() => {
-        //     return { 
-        //         optionsArr: []
-        //     }
-        //  });
     }
 
     handlePickRandom() {
@@ -71,12 +59,6 @@ class IndecisionApp extends React.Component {
             return('Duplication: This value exists!');
         }
         this.setState((preState) => ({ optionsArr: preState.optionsArr.concat(addedItem) }) );
-
-        // this.setState((preState)=>{
-        //     return {
-        //         optionsArr: preState.optionsArr.concat(addedItem)
-        //     }
-        // });
     }
 
     handleDeleteOptionSingle(item){
@@ -84,12 +66,10 @@ class IndecisionApp extends React.Component {
     }
 
     render() {
-        //const title = "Indicision App"; 
         const subtitle = "Put your life deicion in the computer hands!";
         return(
        <div>
             <Header 
-                //title={title} //since we define a default value
                 subtitle={subtitle}
             />
             <Action 
